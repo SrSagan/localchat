@@ -1,6 +1,6 @@
-import os, sys
 import socket
-import asyncio
+import queue
+from threading import Thread
 
 
 class server():
@@ -17,22 +17,17 @@ class server():
 
     def wait_connection(self):
         self.s.listen(5)
-        while True:
-            try:
-                c, addr = self.s.accept()
-                print("Got connection from", addr)
-                self.addr=addr
-                self.c=c
-                break
-            except:
-                print("nada")
+        c, addr = self.s.accept()
+        print("Got connection from", addr)
+        self.addr=addr
+        self.c=c
         
     
     def send_message(self, message):
         self.c.send(message.encode('utf-8'))
     
     def recv_message(self):
-        message = self.c.recv(1024)
+        message =self.c.recv(1024)
         return message
     
     def disconnect(self):
