@@ -1,13 +1,65 @@
 from tkinter import *
+from typing import Collection
 import server
 import concurrent.futures
 
 server = server.server()
 
+<<<<<<< HEAD
 window = Tk()
 label = Label(text="Server")
 label.pack()
 
+=======
+#TODO el server recivira y administrara el resto de clientes
+#tiene que estar constantemente esperando conexiones y guardandolas (quiza en una array de clientes)
+#si el cliente envia cierto codigo borrarlo de la lista de clientes activos
+
+clients=[]
+server.bind()
+while True:
+    client = server.wait_connection()
+    while True:
+        clients = server.get_clients()
+        message = server.recv_message(client)
+        print(message)
+        if(message == b"/disconnect"):
+            server.disconnect(client)
+        else:
+            server.send_global(message)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''window = Tk()
+>>>>>>> 766d6fd3b5865d253493e2b492721a7bbce1d7d2
 server.bind()
 server.wait_connection()
 
@@ -48,4 +100,4 @@ frame = Frame(window)  # , width=300, height=300)
 input_field.bind("<Return>", Enter_pressed)
 frame.pack()
 
-window.mainloop()
+window.mainloop()'''

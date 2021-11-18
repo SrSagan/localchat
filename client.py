@@ -1,17 +1,28 @@
 import socket
+<<<<<<< HEAD
 import queue
 from threading import Thread
 
+=======
+>>>>>>> 766d6fd3b5865d253493e2b492721a7bbce1d7d2
 
 class client():
     def __init__(self):
         s = socket.socket()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 766d6fd3b5865d253493e2b492721a7bbce1d7d2
         self.s=s
         self.host=socket.gethostname()
         self.port=7777
     
     def connect(self):
         self.s.connect((self.host, self.port))
+<<<<<<< HEAD
+=======
+        #return conexion
+>>>>>>> 766d6fd3b5865d253493e2b492721a7bbce1d7d2
 
     def recv_message(self):
         message =self.c.recv(1024)
