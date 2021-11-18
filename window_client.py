@@ -1,11 +1,14 @@
 from tkinter import *
 import client
 
+#TODO el cliente debe conectarse al server y mandar sus mensajes
+#en caso de desconectarse debe mandar un codigo de desconeccion
+#ademas de eso debe esperar constantemente mensajes del server
+
 client = client.client()
 
 window = Tk()
 client.connect()
-
 messages = Text(window)
 messages.config(state=DISABLED)
 messages.pack()
@@ -21,10 +24,9 @@ def Enter_pressed(event):
     messages.insert(INSERT, 'Santi: %s\n' % input_get)
     messages.config(state=DISABLED)
     client.send_message(str(input_get))
-    # label = Label(window, text=input_get)
     input_user.set('')
-    # label.pack()
     return "break"
+
 
 frame = Frame(window)  # , width=300, height=300)
 input_field.bind("<Return>", Enter_pressed)
