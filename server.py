@@ -22,19 +22,6 @@ class server():
 
     def wait_connection(self):
         self.s.listen(5)
-<<<<<<< HEAD
-        c, addr = self.s.accept()
-        print("Got connection from", addr)
-        self.addr=addr
-        self.c=c
-        
-    
-    def send_message(self, message):
-        self.c.send(message.encode('utf-8'))
-    
-    def recv_message(self):
-        message =self.c.recv(1024)
-=======
         client=[]
         c, addr = self.s.accept()
         print("Got connection from", addr)
@@ -53,7 +40,6 @@ class server():
     
     def recv_message(self, client):
         message = client.recv(1024)
->>>>>>> 766d6fd3b5865d253493e2b492721a7bbce1d7d2
         return message
     
     def disconnect(self, client):

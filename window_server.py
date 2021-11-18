@@ -5,12 +5,6 @@ import concurrent.futures
 
 server = server.server()
 
-<<<<<<< HEAD
-window = Tk()
-label = Label(text="Server")
-label.pack()
-
-=======
 #TODO el server recivira y administrara el resto de clientes
 #tiene que estar constantemente esperando conexiones y guardandolas (quiza en una array de clientes)
 #si el cliente envia cierto codigo borrarlo de la lista de clientes activos
@@ -59,7 +53,6 @@ while True:
 
 
 '''window = Tk()
->>>>>>> 766d6fd3b5865d253493e2b492721a7bbce1d7d2
 server.bind()
 server.wait_connection()
 
@@ -85,7 +78,7 @@ def Enter_pressed(event):
     # label.pack()
     return "break"
 
-'''def recived_message():
+def recived_message():
     message = server.recv_message()
     if(message != b''):
         messages.config(state=NORMAL)
@@ -93,7 +86,7 @@ def Enter_pressed(event):
         messages.config(state=DISABLED)
     window.after(0, recived_message)
 
-window.after(0, recived_message)'''
+window.after(0, recived_message)
 
 
 frame = Frame(window)  # , width=300, height=300)
