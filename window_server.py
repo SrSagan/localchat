@@ -20,6 +20,7 @@ while True:
         if(message == b"/disconnect"):
             server.disconnect(client)
         else:
+            print("aca estoy")
             server.send_global(message)
     
 

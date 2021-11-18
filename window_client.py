@@ -24,8 +24,6 @@ def Enter_pressed(event):
     #print(input_get)
     messages.config(state=NORMAL)
     messages.insert(INSERT, 'Santi: %s\n' % input_get)
-    message = client.recv_message()
-    messages.insert(INSERT, 'Otro: %s\n' % message)
     messages.config(state=DISABLED)
     client.send_message(str(input_get))
     input_user.set('')

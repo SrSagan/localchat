@@ -12,7 +12,7 @@ class client():
         #return conexion
 
     def recv_message(self):
-        message =self.c.recv(1024)
+        message =self.s.recv(1024)
         return message
 
     def send_message(self, message):

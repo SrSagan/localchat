@@ -22,8 +22,9 @@ class server():
 
     def wait_connection(self):
         self.s.listen(5)
-        client=[]
         c, addr = self.s.accept()
+        if c not in self.clients:
+            self.clients.append(c)
         print("Got connection from", addr)
         return c
             
