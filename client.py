@@ -4,12 +4,15 @@ class client():
     def __init__(self):
         s = socket.socket()
         self.s=s
-        self.host=''
+        self.host=socket.gethostname()
         self.port=7777
+        self.connected=False
     
     def connect(self, host):
+        print(self.host)
         self.host = host
-        self.s.connect((self.host, self.port))
+        print(self.host)
+        self.s.connect((host, self.port))
         #return conexion
 
     def recv_message(self):
@@ -22,3 +25,9 @@ class client():
 
     def disconnect(self):
         self.s.close()
+
+    def get_connected(self):
+        return self.connected
+    
+    def set_connected(self, status):
+        self.connected = status
