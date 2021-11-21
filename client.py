@@ -9,9 +9,6 @@ class client():
         self.connected=False
     
     def connect(self, host):
-        print(self.host)
-        self.host = host
-        print(self.host)
         self.s.connect((host, self.port))
         #return conexion
 
@@ -20,7 +17,9 @@ class client():
         return message
 
     def send_message(self, message):
+        print(self.connected)
         message=message+"/-/"+self.host
+        print(message)
         self.s.send(message.encode('utf-8'))
 
     def disconnect(self):

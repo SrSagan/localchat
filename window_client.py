@@ -13,11 +13,12 @@ class recieve_messages(threading.Thread):
         threading.Thread.__init__(self)
     
     def run(self):
-        message = client.recv_message()
-        messages.config(state=NORMAL)
-        messages.insert(INSERT, "%s\n" % message.decode('utf-8'))
-        messages.update()
-        messages.config(state=DISABLED)
+        if(client.get_connected()):
+            message = client.recv_message()
+            messages.config(state=NORMAL)
+            messages.insert(INSERT, "%s\n" % message.decode('utf-8'))
+            messages.update()
+            messages.config(state=DISABLED)
 
 window = Tk()
 label = Label(text="Client")
@@ -36,6 +37,7 @@ def Enter_pressed(event):
 
     if(input_get == "/disconnect"):
         client.send_message(str(input_get))
+        client.set_connected(False)
         exit()
 
     elif("/connect" in input_get):
@@ -49,14 +51,11 @@ def Enter_pressed(event):
     return "break"
 
 def recivir_mensajes():
-    if(client.get_connected()):
-        print("now I'm here")
-        recieve_messages().start()
-        messages.after(10, recivir_mensajes)
+    recieve_messages().start()
+    messages.after(10, recivir_mensajes)
 
 frame = Frame(window)  # , width=300, height=300)
 input_field.bind("<Return>", Enter_pressed)
-
 frame.after(10, recivir_mensajes)
 frame.pack()
 window.mainloop()
