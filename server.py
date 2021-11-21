@@ -1,10 +1,5 @@
 import socket
 
-#si alguien se conecta debe ser guardado en clientes solamente si no esta en clientes
-#para desconectarse debe mandar un codigo de desconxion
-#para recivir mensajes el usuario (que anteriormente ya se habia conectado) se reconectara, el server esperara su mensaje 
-#luego de eso lo debera reenviar globalmente el mensaje
-
 class server():
     def __init__(self):
         self.s = socket.socket()
@@ -59,3 +54,5 @@ class server():
     def disconnect(self, client):
         client.close()
         self.clients.pop(self.clients.index(client))
+        self.names.pop(self.clients.index(client))
+        self.hosts.pop(self.clients.index(client))

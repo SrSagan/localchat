@@ -4,9 +4,7 @@ import threading
 
 server = server.server()
 
-#TODO el server recivira y administrara el resto de clientes
-#tiene que estar constantemente esperando conexiones y guardandolas (quiza en una array de clientes)
-#si el cliente envia cierto codigo borrarlo de la lista de clientes activos
+#TODO comentar todo no se entiende un pingo ke esta pasando en ningun lado
 
 threads=[]
 server.bind()
@@ -33,7 +31,7 @@ class recieve_messages(threading.Thread):
                 message = adress+" disconnected"
                 server.send_event(message)
                 break
-            
+
             elif("/name" in message):
                 x = message.find("/name")
                 if(x == 0):

@@ -2,10 +2,6 @@ from tkinter import *
 import client
 import threading
 
-#TODO el cliente debe conectarse al server y mandar sus mensajes
-#en caso de desconectarse debe mandar un codigo de desconeccion
-#ademas de eso debe esperar constantemente mensajes del server
-
 client = client.client()
 
 class recieve_messages(threading.Thread):
@@ -38,14 +34,13 @@ def Enter_pressed(event):
     if(input_get == "/disconnect"):
         client.send_message(str(input_get))
         client.set_connected(False)
-        exit()
+        return "break"
 
     elif("/connect" in input_get):
         x = input_get.find("/connect")
         hostname = input_get[x+9:]
         client.connect(hostname)
         client.set_connected(True)
-        print("im here")
         return "break"
 
     client.send_message(str(input_get))
