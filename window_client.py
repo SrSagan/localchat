@@ -22,7 +22,6 @@ class recieve_messages(threading.Thread):
 window = Tk()
 label = Label(text="Client")
 label.pack()
-client.connect()
 messages = Text(window)
 messages.config(state=DISABLED)
 messages.pack()
@@ -33,11 +32,18 @@ input_field.pack(side=BOTTOM, fill=X)
 
 def Enter_pressed(event):
     input_get = input_field.get()
-    messages.config(state=DISABLED)
-    client.send_message(str(input_get))
     input_user.set('')
+
     if(input_get == "/disconnect"):
+        client.send_message(str(input_get))
         exit()
+
+    elif("/connect" in input_get):
+        x = input_get.find("/connect")
+        hostname = input_get[x+8:]
+        client.connect(hostname)
+
+    client.send_message(str(input_get))
     return "break"
 
 def recivir_mensajes():
