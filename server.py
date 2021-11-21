@@ -1,6 +1,4 @@
 import socket
-import queue
-from threading import Thread
 
 #si alguien se conecta debe ser guardado en clientes solamente si no esta en clientes
 #para desconectarse debe mandar un codigo de desconxion
@@ -13,9 +11,9 @@ class server():
         self.host=socket.gethostname()
         self.port=7777
 
-        self.addr=0
-        self.c=0
+        self.names=[]
         self.clients=[]
+        self.hosts=[]
     
     def bind(self):
         self.s.bind((self.host, self.port))
@@ -27,17 +25,32 @@ class server():
             self.clients.append(c)
         print("Got connection from", addr)
         return c
-            
+        
     def send_message(self, message, client):
         client.send(message.encode('utf-8'))
+    
+    def add_name(self, name):
+        self.names.append(name)
+    
+    def add_host(self, host):
+        self.hosts.append(host)
 
     def get_clients(self):
         return self.clients
 
-    def send_global(self, message):
+    def send_global(self, message, sender):
         for c in self.clients:
-            print(c)
-            c.send(message)
+            try: 
+                index = self.hosts.index(sender)
+                endmessage = self.names[index]+": "+message
+            except:
+                endmessage = sender+": "+message
+                
+            c.send(endmessage.encode('utf-8'))
+    
+    def send_event(self, message):
+        for c in self.clients:
+            c.send(message.encode('utf-8'))
     
     def recv_message(self, client):
         message = client.recv(1024)

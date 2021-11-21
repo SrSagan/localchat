@@ -4,10 +4,11 @@ class client():
     def __init__(self):
         s = socket.socket()
         self.s=s
-        self.host=socket.gethostname()
+        self.host#=socket.gethostname()
         self.port=7777
     
-    def connect(self):
+    def connect(self, host):
+        self.host = host
         self.s.connect((self.host, self.port))
         #return conexion
 
@@ -16,6 +17,7 @@ class client():
         return message
 
     def send_message(self, message):
+        message=message+"/-/"+self.host
         self.s.send(message.encode('utf-8'))
 
     def disconnect(self):
