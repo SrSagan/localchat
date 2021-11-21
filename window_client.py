@@ -7,7 +7,6 @@ import threading
 #ademas de eso debe esperar constantemente mensajes del server
 
 client = client.client()
-connected = False
 
 class recieve_messages(threading.Thread):
     def __init__(self):
@@ -44,12 +43,14 @@ def Enter_pressed(event):
         hostname = input_get[x+9:]
         client.connect(hostname)
         client.set_connected(True)
+        print("im here")
 
     client.send_message(str(input_get))
     return "break"
 
 def recivir_mensajes():
     if(client.get_connected()):
+        print("now I'm here")
         recieve_messages().start()
         messages.after(10, recivir_mensajes)
 

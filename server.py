@@ -16,7 +16,7 @@ class server():
         self.hosts=[]
     
     def bind(self):
-        self.s.bind((self.host, self.port))
+        self.s.bind(('192.168.1.36', self.port))
 
     def wait_connection(self):
         self.s.listen(5)
