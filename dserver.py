@@ -1,3 +1,4 @@
+from ctypes import addressof
 import server
 import threading
 
@@ -18,16 +19,29 @@ class recieve_messages(threading.Thread):
         while True:
             message = server.recv_message(self.client)
             message = message.decode('utf-8')
+
+            #decode message and adress
+            x = message.find("/-/")
+            adress = message[x+3:]
+            message = message[:x]
+            print("adress:", adress)
+            print("message:", message)
+
+
             if(message == "/disconnect"):
                 server.disconnect(self.client)
+                message = adress+" disconnected"
+                server.send_event(message)
                 break
+            
             elif("/name" in message):
                 x = message.find("/name")
                 if(x == 0):
                     name = message[x+6:]
                     server.add_name(name)
+                    server.add_host(adress)
             else:
-                server.send_global(message, client)
+                server.send_global(message, adress)
         print(str(self.client)+" disconnected")
 
 

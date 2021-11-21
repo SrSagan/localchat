@@ -13,6 +13,7 @@ class server():
 
         self.names=[]
         self.clients=[]
+        self.hosts=[]
     
     def bind(self):
         self.s.bind((self.host, self.port))
@@ -30,15 +31,26 @@ class server():
     
     def add_name(self, name):
         self.names.append(name)
+    
+    def add_host(self, host):
+        self.hosts.append(host)
 
     def get_clients(self):
         return self.clients
 
     def send_global(self, message, sender):
         for c in self.clients:
-            index = self.clients.index(sender)
-            endmessage = self.names[index]+" "+message
+            try: 
+                index = self.hosts.index(sender)
+                endmessage = self.names[index]+": "+message
+            except:
+                endmessage = sender+": "+message
+                
             c.send(endmessage.encode('utf-8'))
+    
+    def send_event(self, message):
+        for c in self.clients:
+            c.send(message.encode('utf-8'))
     
     def recv_message(self, client):
         message = client.recv(1024)

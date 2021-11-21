@@ -16,6 +16,7 @@ class client():
         return message
 
     def send_message(self, message):
+        message=message+"/-/"+self.host
         self.s.send(message.encode('utf-8'))
 
     def disconnect(self):
