@@ -46,6 +46,7 @@ def Enter_pressed(event):
         client.connect(hostname)
         client.set_connected(True)
         print("im here")
+        return "break"
 
     client.send_message(str(input_get))
     return "break"
