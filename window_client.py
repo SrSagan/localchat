@@ -33,17 +33,24 @@ def Enter_pressed(event):
 
     if(input_get == "/disconnect"):
         client.send_message(str(input_get))
+        client.disconnect()
         client.set_connected(False)
         return "break"
 
     elif("/connect" in input_get):
         x = input_get.find("/connect")
         hostname = input_get[x+9:]
-        client.connect(hostname)
-        client.set_connected(True)
+        result, state = client.connect(hostname)
+        messages.config(state=NORMAL)
+        messages.insert(INSERT, "%s\n" % result)
+        messages.update()
+        messages.config(state=DISABLED)
+        client.set_connected(state)
         return "break"
 
-    client.send_message(str(input_get))
+    if(client.get_connected()):
+        client.send_message(str(input_get))
+
     return "break"
 
 def recivir_mensajes():

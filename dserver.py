@@ -27,9 +27,9 @@ class recieve_messages(threading.Thread):
 
 
             if(message == "/disconnect"):
-                server.disconnect(self.client)
                 message = adress+" disconnected"
                 server.send_event(message)
+                server.disconnect(self.client)
                 break
 
             elif("/name" in message):

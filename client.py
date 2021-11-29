@@ -9,8 +9,11 @@ class client():
         self.connected=False
     
     def connect(self, host):
-        self.s.connect((host, self.port))
-        #return conexion
+        try:
+            self.s.connect((host, self.port))
+            return "Connection succesful", 1
+        except: 
+            return "Connection failed", 0
 
     def recv_message(self):
         message =self.s.recv(1024)
